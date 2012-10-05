@@ -1,0 +1,23 @@
+From: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Date: Fri, 5 Oct 2012 11:20:10 +0000
+Subject: [PATCH] kfreebsd-pipe
+
+===================================================================
+---
+ crypto/perlasm/x86_64-xlate.pl |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/crypto/perlasm/x86_64-xlate.pl b/crypto/perlasm/x86_64-xlate.pl
+index fe348b9..8adf167 100755
+--- a/crypto/perlasm/x86_64-xlate.pl
++++ b/crypto/perlasm/x86_64-xlate.pl
+@@ -62,7 +62,7 @@ my $output = shift;
+   my ($outdev,$outino,@junk)=stat($output);
+ 
+     open STDOUT,">$output" || die "can't open $output: $!"
+-	if ($stddev!=$outdev || $stdino!=$outino);
++#	if ($stddev!=$outdev || $stdino!=$outino);
+ }
+ 
+ my $masmref=8 + 50727*2**-32;	# 8.00.50727 shipped with VS2005
+-- 

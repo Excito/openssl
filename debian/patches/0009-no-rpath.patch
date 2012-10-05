@@ -1,8 +1,17 @@
-Index: openssl-0.9.8k/Makefile.shared
+From: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Date: Fri, 5 Oct 2012 11:20:10 +0000
+Subject: [PATCH] no-rpath
+
 ===================================================================
---- openssl-0.9.8k.orig/Makefile.shared	2008-09-17 17:56:40.000000000 +0200
-+++ openssl-0.9.8k/Makefile.shared	2009-07-19 11:37:25.000000000 +0200
-@@ -151,7 +151,7 @@
+---
+ Makefile.shared |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/Makefile.shared b/Makefile.shared
+index 3183436..6951881 100644
+--- a/Makefile.shared
++++ b/Makefile.shared
+@@ -151,7 +151,7 @@ DO_GNU_SO=$(CALC_VERSIONS); \
  	NOALLSYMSFLAGS='-Wl,--no-whole-archive'; \
  	SHAREDFLAGS="$(CFLAGS) $(SHARED_LDFLAGS) -shared -Wl,-Bsymbolic -Wl,-soname=$$SHLIB$$SHLIB_SOVER$$SHLIB_SUFFIX"
  
@@ -11,3 +20,4 @@ Index: openssl-0.9.8k/Makefile.shared
  
  #This is rather special.  It's a special target with which one can link
  #applications without bothering with any features that have anything to
+-- 

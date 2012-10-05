@@ -1,0 +1,49 @@
+From: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Date: Fri, 5 Oct 2012 11:20:12 +0000
+Subject: [PATCH] version-script
+
+===================================================================
+---
+ Configure          |    2 ++
+ engines/openssl.ld |    5 +++++
+ openssl.ld         |    5 +++++
+ 3 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 engines/openssl.ld
+ create mode 100644 openssl.ld
+
+diff --git a/Configure b/Configure
+index 7ad3755..8336eeb 100755
+--- a/Configure
++++ b/Configure
+@@ -1518,6 +1518,8 @@ if ($strict_warnings)
+ 		}
+ 	}
+ 
++$shared_ldflag .= " -Wl,--version-script=openssl.ld";
++
+ open(IN,'<Makefile.org') || die "unable to read Makefile.org:$!\n";
+ unlink("$Makefile.new") || die "unable to remove old $Makefile.new:$!\n" if -e "$Makefile.new";
+ open(OUT,">$Makefile.new") || die "unable to create $Makefile.new:$!\n";
+diff --git a/engines/openssl.ld b/engines/openssl.ld
+new file mode 100644
+index 0000000..7dd9663
+--- /dev/null
++++ b/engines/openssl.ld
+@@ -0,0 +1,5 @@
++OPENSSL_0.9.8 {
++	 global:
++		 *;
++};
++
+diff --git a/openssl.ld b/openssl.ld
+new file mode 100644
+index 0000000..7dd9663
+--- /dev/null
++++ b/openssl.ld
+@@ -0,0 +1,5 @@
++OPENSSL_0.9.8 {
++	 global:
++		 *;
++};
++
+-- 

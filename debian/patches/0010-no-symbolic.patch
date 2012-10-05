@@ -1,8 +1,17 @@
-Index: openssl-0.9.8k/Makefile.shared
+From: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Date: Fri, 5 Oct 2012 11:20:10 +0000
+Subject: [PATCH] no-symbolic
+
 ===================================================================
---- openssl-0.9.8k.orig/Makefile.shared	2009-07-19 11:35:02.000000000 +0200
-+++ openssl-0.9.8k/Makefile.shared	2009-07-19 11:35:48.000000000 +0200
-@@ -149,7 +149,7 @@
+---
+ Makefile.shared |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/Makefile.shared b/Makefile.shared
+index 6951881..48e2710 100644
+--- a/Makefile.shared
++++ b/Makefile.shared
+@@ -149,7 +149,7 @@ DO_GNU_SO=$(CALC_VERSIONS); \
  	SHLIB_SUFFIX=; \
  	ALLSYMSFLAGS='-Wl,--whole-archive'; \
  	NOALLSYMSFLAGS='-Wl,--no-whole-archive'; \
@@ -11,3 +20,4 @@ Index: openssl-0.9.8k/Makefile.shared
  
  DO_GNU_APP=LDFLAGS="$(CFLAGS)"
  
+-- 

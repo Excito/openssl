@@ -1,0 +1,25 @@
+From: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Date: Fri, 5 Oct 2012 11:20:11 +0000
+Subject: [PATCH] valgrind
+
+===================================================================
+---
+ crypto/rand/md_rand.c |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/crypto/rand/md_rand.c b/crypto/rand/md_rand.c
+index 0f8dd3e..90e3462 100644
+--- a/crypto/rand/md_rand.c
++++ b/crypto/rand/md_rand.c
+@@ -477,8 +477,10 @@ static int ssleay_rand_bytes(unsigned char *buf, int num)
+ 		MD_Update(&m,local_md,MD_DIGEST_LENGTH);
+ 		MD_Update(&m,(unsigned char *)&(md_c[0]),sizeof(md_c));
+ #ifndef PURIFY
++#if 0 /* Don't add uninitialised data. */
+ 		MD_Update(&m,buf,j); /* purify complains */
+ #endif
++#endif
+ 		k=(st_idx+MD_DIGEST_LENGTH/2)-st_num;
+ 		if (k > 0)
+ 			{
+-- 

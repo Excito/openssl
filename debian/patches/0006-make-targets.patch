@@ -1,0 +1,23 @@
+From: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Date: Fri, 5 Oct 2012 11:20:10 +0000
+Subject: [PATCH] make-targets
+
+===================================================================
+---
+ Makefile.org |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/Makefile.org b/Makefile.org
+index 960cfec..761461d 100644
+--- a/Makefile.org
++++ b/Makefile.org
+@@ -132,7 +132,7 @@ FIPSCANLIB=
+ 
+ BASEADDR=
+ 
+-DIRS=   crypto fips ssl engines apps test tools
++DIRS=   crypto fips ssl engines apps tools
+ SHLIBDIRS= crypto ssl fips
+ 
+ # dirs in crypto to build
+-- 

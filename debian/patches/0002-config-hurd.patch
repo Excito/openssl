@@ -1,0 +1,25 @@
+From: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Date: Fri, 5 Oct 2012 11:20:09 +0000
+Subject: [PATCH] config-hurd
+
+===================================================================
+---
+ config |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/config b/config
+index 7a958cb..abf0267 100755
+--- a/config
++++ b/config
+@@ -162,8 +162,8 @@ case "${SYSTEM}:${RELEASE}:${VERSION}:${MACHINE}" in
+ 	echo "${MACHINE}-whatever-linux1"; exit 0
+ 	;;
+ 
+-    GNU*)
+-	echo "hurd-x86"; exit 0;
++    GNU:*|GNU/*:*)
++	echo "${MACHINE}-gnuish"; exit 0;
+ 	;;
+ 
+     LynxOS:*)
+-- 
