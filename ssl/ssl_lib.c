@@ -1000,6 +1000,11 @@ long SSL_ctrl(SSL *s,int cmd,long larg,void *parg)
 		s->max_cert_list=larg;
 		return(l);
 	case SSL_CTRL_SET_MTU:
+#ifndef OPENSSL_NO_DTLS1
+		if (larg < (long)dtls1_min_mtu())
+			return 0;
+#endif
+
 		if (SSL_version(s) == DTLS1_VERSION ||
 		    SSL_version(s) == DTLS1_BAD_VER)
 			{
@@ -1940,15 +1945,13 @@ int check_srvr_ecc_cert_and_alg(X509 *x, SSL_CIPHER *cs)
 /* THIS NEEDS CLEANING UP */
 X509 *ssl_get_server_send_cert(SSL *s)
 	{
-	unsigned long alg,mask,kalg;
+	unsigned long alg,kalg;
 	CERT *c;
-	int i,is_export;
+	int i;
 
 	c=s->cert;
 	ssl_set_cert_masks(c, s->s3->tmp.new_cipher);
 	alg=s->s3->tmp.new_cipher->algorithms;
-	is_export=SSL_C_IS_EXPORT(s->s3->tmp.new_cipher);
-	mask=is_export?c->export_mask:c->mask;
 	kalg=alg&(SSL_MKEY_MASK|SSL_AUTH_MASK);
 
 	if (kalg & SSL_kECDH)
