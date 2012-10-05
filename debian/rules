@@ -18,7 +18,7 @@ export VERSION=$(shell dpkg-parsechangelog | grep '^Version:' | sed -e 's/^.*://
 # The binary architeture
 DEB_HOST_ARCH = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
-CONFARGS  = --prefix=/usr --openssldir=/usr/lib/ssl no-idea no-mdc2 no-rc5 zlib  enable-tlsext
+CONFARGS  = --prefix=/usr --openssldir=/usr/lib/ssl no-idea no-mdc2 no-rc5 zlib  enable-tlsext -DHAVE_CRYPTODEV -DUSE_CRYPTODEV_DIGESTS -DHASH_MAX_LEN=64
 OPT_alpha = ev4 ev5
 OPT_i386  = i486 i586 i686/cmov
 OPT_sparc = v8 v9
