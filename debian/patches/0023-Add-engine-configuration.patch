@@ -1,0 +1,25 @@
+From: Bernhard Schuster <bernhard.schuster@excito.com>
+Date: Fri, 5 Oct 2012 11:27:37 +0000
+Subject: [PATCH] Add engine configuration
+
+---
+ apps/openssl.cnf |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+
+diff --git a/apps/openssl.cnf b/apps/openssl.cnf
+index 8fdacae..d198e5c 100644
+--- a/apps/openssl.cnf
++++ b/apps/openssl.cnf
+@@ -311,3 +311,11 @@ authorityKeyIdentifier=keyid,issuer:always
+ 
+ # This really needs to be in place for it to be a proxy certificate.
+ proxyCertInfo=critical,language:id-ppl-anyLanguage,pathlen:3,policy:foo
++
++
++[engine_section]
++cryptodev = cryptodev_section
++
++[cryptodev_section]
++#dynamic_path = /usr/lib/ssl/engines/lib_replace_name_engine.so
++default_algorithms = ALL
+-- 
