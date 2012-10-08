@@ -1,3 +1,10 @@
+openssl (0.9.8x-1) unstable; urgency=low
+
+  [ Bernhard Schuster ]
+  * adding add engine patch
+
+ -- Bernhard Schuster <bernhard.schuster@excito.com>  Mon, 08 Oct 2012 15:01:20 +0200
+
 openssl (0.9.8o-4squeeze13) squeeze-security; urgency=high
 
   * Non-maintainer upload by the Security Team.

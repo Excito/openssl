@@ -8,7 +8,7 @@ Subject: [PATCH] rc4-amd64
  1 files changed, 3 insertions(+), 0 deletions(-)
 
 diff --git a/Configure b/Configure
-index 338d46b..40d5a31 100755
+index aea4f62..3646248 100755
 --- a/Configure
 +++ b/Configure
 @@ -130,6 +130,9 @@ my $x86_coff_asm="x86cpuid-cof.o:bn86-cof.o co86-cof.o MAYBE-MO86-cof.o:dx86-cof

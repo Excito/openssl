@@ -1,6 +1,5 @@
 0001-ca.patch
 0002-config-hurd.patch
-0003-debian-targets.patch
 0004-engines-path.patch
 0005-kfreebsd-pipe.patch
 0006-make-targets.patch

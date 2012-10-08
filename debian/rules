@@ -62,9 +62,12 @@ build-stamp:
 clean:
 	dh_testdir
 	dh_testroot
+	cp -f Makefile Makefile.debold
+	cp -f crypto/opensslconf.h crypto/opensslconf.h.debold
+	cp -f tools/c_rehash tools/c_rehash.debold
 	-rm -f build-stamp
-	-./Configure $(CONFARGS) debian-$(DEB_HOST_ARCH)
-	[ ! -f Makefile ] || make -f Makefile  clean clean-shared
+#	-./Configure $(CONFARGS) debian-$(DEB_HOST_ARCH)
+#	[ ! -f Makefile ] || make -f Makefile  clean clean-shared
 	#-make -f Makefile  dclean
 #	perl util/ssldir.pl /usr/local/ssl
 	-rm -f test/.rnd test/testkey.pem test/testreq.pem test/certCA.srl
@@ -78,7 +81,10 @@ clean:
 	-rm doc/*.pod
 	-rm -f libcrypto.* libssl.*
 	-cd test && rm -f .rnd tmp.bntest tmp.bctest *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff bntest ectest  ecdsatest ecdhtest ideatest md2test  md4test md5test hmactest rc2test rc4test rc5test destest shatest sha1test sha256t sha512t mdc2test rmdtest randtest dhtest enginetest bftest casttest ssltest exptest dsatest rsa_test evp_test *.ss *.srl log dummytest newkey.pem igetest
-	-rm Makefile apps/CA.pl tools/c_rehash crypto/opensslconf.h crypto/x86_64cpuid.S
+	mv Makefile.debold Makefile || true
+	mv crypto/opensslconf.h.debold crypto/opensslconf.h || true
+	mv tools/c_rehash.debold tools/c_rehash || true
+
 	dh_clean
 
 binary-indep:	build

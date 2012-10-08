@@ -104,7 +104,7 @@ The upstream sources have this set to various different paths.
  94 files changed, 94 insertions(+), 94 deletions(-)
 
 diff --git a/Configure b/Configure
-index 8336eeb..0fd5f62 100755
+index 99e4b9a..171185f 100755
 --- a/Configure
 +++ b/Configure
 @@ -1,4 +1,4 @@

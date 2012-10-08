@@ -10,10 +10,10 @@ Subject: [PATCH] engines-path
  3 files changed, 7 insertions(+), 7 deletions(-)
 
 diff --git a/Configure b/Configure
-index 049c7cc..338d46b 100755
+index 92af726..aea4f62 100755
 --- a/Configure
 +++ b/Configure
-@@ -1744,7 +1744,7 @@ while (<IN>)
+@@ -1789,7 +1789,7 @@ while (<IN>)
  		# $foo is to become "$prefix/lib$multilib/engines";
  		# as Makefile.org and engines/Makefile are adapted for
  		# $multilib suffix.
