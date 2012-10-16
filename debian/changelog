@@ -1,3 +1,11 @@
+openssl (0.9.8x-2) unstable; urgency=low
+
+  * Add localoptions, .gitignore
+  * Refresh patches
+  * Fix openssl.cnf, hack to make cryptodev the default engine
+
+ -- Bernhard Schuster <bernhard.schuster@excito.com>  Tue, 16 Oct 2012 13:27:12 +0200
+
 openssl (0.9.8x-1) unstable; urgency=low
 
   [ Bernhard Schuster ]
