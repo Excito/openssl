@@ -20,3 +20,4 @@
 0021-block_diginotar.patch
 0022-block_digicert_malaysia.patch
 0023-Add-engine-configuration.patch
+0024-load-cryptodev-by-default.patch

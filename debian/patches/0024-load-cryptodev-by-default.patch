@@ -1,0 +1,99 @@
+--- a/crypto/engine/eng_all.c
++++ b/crypto/engine/eng_all.c
+@@ -68,9 +68,16 @@
+ #if 0
+ 	ENGINE_load_openssl();
+ #endif
+-#if !defined(OPENSSL_NO_HW) && !defined(OPENSSL_NO_HW_PADLOCK)
++#ifndef OPENSSL_NO_HW
++#if defined(__OpenBSD__) || defined(__FreeBSD__) || defined(HAVE_CRYPTODEV)
++	ENGINE_setup_bsd_cryptodev();
++/*	ENGINE_load_cryptodev();*/
++#endif
++#ifndef OPENSSL_NO_HW_PADLOCK
+ 	ENGINE_load_padlock();
+ #endif
++#endif
++
+ 	ENGINE_load_dynamic();
+ #ifndef OPENSSL_NO_STATIC_ENGINE
+ #ifndef OPENSSL_NO_HW
+@@ -104,16 +111,13 @@
+ #endif
+ #endif
+ #ifndef OPENSSL_NO_HW
+-#if defined(__OpenBSD__) || defined(__FreeBSD__) || defined(HAVE_CRYPTODEV)
+-	ENGINE_load_cryptodev();
+-#endif
+ #if defined(OPENSSL_SYS_WIN32) && !defined(OPENSSL_NO_CAPIENG)
+ 	ENGINE_load_capi();
+ #endif
+ #endif
+ 	}
+ 
+-#if defined(__OpenBSD__) || defined(__FreeBSD__)
++#if defined(__OpenBSD__) || defined(__FreeBSD__) || defined(HAVE_CRYPTODEV)
+ void ENGINE_setup_bsd_cryptodev(void) {
+ 	static int bsd_cryptodev_default_loaded = 0;
+ 	if (!bsd_cryptodev_default_loaded) {
+--- a/crypto/engine/engine.h
++++ b/crypto/engine/engine.h
+@@ -705,7 +705,7 @@
+  * values. */
+ void *ENGINE_get_static_state(void);
+ 
+-#if defined(__OpenBSD__) || defined(__FreeBSD__)
++#if defined(__OpenBSD__) || defined(__FreeBSD__) || defined(HAVE_CRYPTODEV)
+ void ENGINE_setup_bsd_cryptodev(void);
+ #endif
+ 
+--- a/crypto/evp/c_all.c
++++ b/crypto/evp/c_all.c
+@@ -83,7 +83,7 @@
+ 	OpenSSL_add_all_ciphers();
+ 	OpenSSL_add_all_digests();
+ #ifndef OPENSSL_NO_ENGINE
+-# if defined(__OpenBSD__) || defined(__FreeBSD__)
++# if defined(__OpenBSD__) || defined(__FreeBSD__) || defined(HAVE_CRYPTODEV)
+ 	ENGINE_setup_bsd_cryptodev();
+ # endif
+ #endif
+--- a/crypto/engine/eng_fat.c
++++ b/crypto/engine/eng_fat.c
+@@ -154,6 +154,12 @@
+ 	ENGINE_register_ECDSA(e);
+ #endif
+ 	ENGINE_register_RAND(e);
++/*XXX make this generic, not fixed to cryptodev, but for now that's acceptable*/
++#if 1
++	const char *name = ENGINE_get_id (e);
++	if (strcmp (name,"cryptodev") == 0)
++		ENGINE_set_default (e, ENGINE_METHOD_ALL & ~ENGINE_METHOD_RAND); /*RAND ENABLE? DUNNO*/
++#endif
+ 	return 1;
+ 	}
+ 
+--- a/apps/openssl.cnf
++++ b/apps/openssl.cnf
+@@ -313,9 +313,17 @@
+ proxyCertInfo=critical,language:id-ppl-anyLanguage,pathlen:3,policy:foo
+ 
+ 
+-[engine_section]
+-cryptodev = cryptodev_section
+ 
+-[cryptodev_section]
+-#dynamic_path = /usr/lib/ssl/engines/lib_replace_name_engine.so
++
++
++
++openssl_conf = openssl_def
++
++[openssl_def]
++engines = openssl_engines
++
++[openssl_engines]
++cryptodev = cryptodev_engine
++
++[cryptodev_engine]
+ default_algorithms = ALL
