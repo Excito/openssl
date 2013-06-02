@@ -1,3 +1,9 @@
+openssl (0.9.8y-1) unstable; urgency=high
+
+  * Update to openssl-0.9.8y: Fix CVE-2013-0169; Fix CVE-2013-0166
+  * Add Build-Depends for cryptodev-dev
+
+ -- Florian Steinel <git@2012.git.flonet.org>  Sun, 02 Jun 2013 22:27:20 +0200
 openssl (0.9.8x-2) unstable; urgency=low
 
   * Add localoptions, .gitignore
